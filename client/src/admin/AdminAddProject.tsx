@@ -2,7 +2,6 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { toast } from 'react-toastify';
 import { useAdmin } from "../context/AdminContext";
 import { useNavigate } from "react-router-dom";
-import api from "../api/axiosConfig";
 interface ProjectForm {
   title: string;
   description: string;
@@ -290,12 +289,6 @@ export default function AdminAddProject() {
       images.forEach(image => formData.append("images", image.file));
 
       // FIXED: Use the axios instance instead of fetch
-      const response = await api.post('/projects', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-        timeout: 60000 // 60 second timeout for file uploads
-      });
 
       toast.success("🎉 Project added successfully!");
       
